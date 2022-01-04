@@ -1,6 +1,4 @@
-To implement this solver, please 
-
- run demonXXXX.m to solve different problems
+To implement this solver, please run "demonXXXX.m" to solve different problems
 
 This source code contains the algorithm described in:
 
