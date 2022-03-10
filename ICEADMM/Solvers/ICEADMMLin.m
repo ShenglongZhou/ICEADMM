@@ -183,15 +183,16 @@ end
 
 
 %--------------------------------------------------------------------------
-function [obj,grad] = func(A,b,I,m,n,w,x) 
-    Axb   = A*x-b;
-    obj   = 0;
-    grad  = zeros(n,1);
-    for t = 1:m
-        tmp  = Axb(I(t)+1:I(t+1));
-        obj  = obj  + norm( tmp )^2*w(t);
+function [objy,grady] = func(A,b,I,m,n,w,y) 
+ 
+    objy     = 0;
+    grady    = zeros(n,1);
+    for t    = 1:m
+        Aind = A(I(t)+1:I(t+1),:);
+        tmp  = Aind*y-b(I(t)+1:I(t+1));
+        objy = objy  + norm( tmp )^2*w(t); 
         if nargout   == 2
-        grad = grad + w(t)*(tmp'* A(I(t)+1:I(t+1),:))';
+        grady = grady + w(t)*(tmp'* Aind)';
         end
     end
 end
@@ -202,11 +203,11 @@ function  [objX,gradX]  = funcX(A,b,I,m,n,w,X)
     objX   = 0; 
     gradX  = zeros(n,m);
     for t  = 1:m
-        ind  = I(t)+1:I(t+1);
-        tmp  = A(ind,:)*X(:,t)-b(ind);
+        Aind = A(I(t)+1:I(t+1),:);
+        tmp  = Aind*X(:,t)-b(I(t)+1:I(t+1));
         objX  = objX  + norm( tmp )^2*w(t); 
         if nargout   == 2
-           gradX(:,t) =  w(t)*(tmp'* A(ind,:))';
+           gradX(:,t) =  w(t)*(tmp'* Aind )';
         end
     end
 end
