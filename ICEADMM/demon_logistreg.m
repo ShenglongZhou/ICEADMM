@@ -1,7 +1,6 @@
 clc; clear; close all;
-addpath(genpath(pwd));
-
-dat   = load('toxicity.mat'); 
+addpath(genpath(pwd)); 
+dat   = load('toxicity.mat'); %santander-transaction
 lab   = load('toxicityclass.mat'); 
 lab.y(lab.y==-1)= 0;
 
@@ -12,13 +11,11 @@ I     = randperm(d);
 A     = A(I,:);  % randomize samples
 b     = b(I,:);
 
-m     = 200;     % split smaples into m groups
-k0    = 10;
+m     = 64;      % split smaples into m groups
+k0    = 5;
 di    = round(d/m)*ones(1,m-1);
 di    = [di d-sum(di)];  
+
 pars.r0 = 0.1;   % incease this value if you find the solver diverges
-out   = ICEADMMLog(di,n,A,b,k0,pars)
-plotobj(out.iter,out.objy,out.objX,'ICEADMM')
-
- 
-
+out     = ICEADMM4LogistReg(di,n,A,b,k0,pars)
+plotobj(out.iter,out.objy,out.objX,k0,'ICEADMM')
