@@ -1,9 +1,9 @@
-function  plotobj(noiter,obj1,obj2,txt)
+function  plotobj(noiter,obj1,obj2,k0,txt)
     figure('Renderer', 'painters', 'Position',[1100 400 400 320]);
     axes('Position', [0.13 0.14 0.85 0.8] );
     colors = {'#173f5f','#20639b','#3caea3','#f6d55c','#ed553b'}; 
-    if  noiter >100
-        iter = log2(1:noiter);
+    if  noiter > 200 && k0 >= 2
+        iter = log2(1:noiter)./log2(k0) ;
     else
         iter = 1:noiter;    
     end
@@ -14,10 +14,10 @@ function  plotobj(noiter,obj1,obj2,txt)
     legend('$f(y^k)$','$F(X^k)$',...
            'Interpreter','latex','location','SouthWest')
     xlabel('Iterations'); ylabel('Objective'); title(txt);
-    if  noiter >100
+    if  noiter >200 && k0 >= 2
         a = round(iter(end));
         set(gca, 'XTick', 0:a);
-        for j = 1:a+1; xtl{j} = ['2^{' num2str(j-1),'}']; end
+        for j = 1:a+1; xtl{j} = [ num2str(k0),'^{' num2str(j-1),'}']; end
         set(gca, 'XTickLabel', xtl);
         axis([0 a+1 min([obj1 obj2])/1.01 max([obj1 obj2])*1.01]);
     end
