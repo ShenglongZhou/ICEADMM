@@ -87,8 +87,7 @@ end
 
 objy      = zeros(1,maxit);
 objX      = zeros(1,maxit);
-erry      = zeros(1,maxit);
-errX      = zeros(1,maxit);
+erry      = zeros(1,maxit); 
 X         = zeros(n,m);  
 PI        = zeros(n,m); 
 Z         = zeros(n,m); 
@@ -115,8 +114,7 @@ for iter = 0 : maxit
     
     objy(iter+1) = fy;
     objX(iter+1) = fX;
-    erry(iter+1) = err; 
-    errX(iter+1) = Fnorm(sum(gX,2));
+    erry(iter+1) = err;  
     if mod(iter, k0)==0    
     fprintf(' Communication at iter = %4d %9.4f %9.4f  %6.3fsec\n',iter, fy, fX, toc(t0)); 
     end 
