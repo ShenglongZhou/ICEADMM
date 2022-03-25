@@ -1,6 +1,6 @@
 clc; clear; close all;
 addpath(genpath(pwd)); 
-dat   = load('toxicity.mat'); %santander-transaction
+dat   = load('toxicity.mat');  
 lab   = load('toxicityclass.mat'); 
 lab.y(lab.y==-1)= 0;
 
