@@ -1,7 +1,7 @@
 function out = ICEADMM4LinearReg(di,n,A,b,k0,inexact,pars)
 % This solver solves linear regression problem in the following form:
 %
-%         min_{x_i,x\in\R^n}  sum_{i=1}^m 0.5||A_ix_i-b_i||^2  
+%         min_{x_i,x\in\R^n}  sum_{i=1}^m (0.5/d_i)||A_ix_i-b_i||^2  
 %            s.t.             x_i=x, i=1,2,...,m
 %
 % where (A_i,b_i) is the data for node/client i
