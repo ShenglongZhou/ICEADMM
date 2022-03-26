@@ -121,7 +121,7 @@ for iter = 0 : maxit
     if mod(iter, k0)==0    
     fprintf(' Communication at iter = %4d %9.4f %9.4f  %6.3fsec\n',iter, fy, fX, toc(t0)); 
     end
-    if err < tol && mod(iter,1)==0; break;  end
+    if err < tol; break;  end
     
     if inexact
         for j       = 1 : m
