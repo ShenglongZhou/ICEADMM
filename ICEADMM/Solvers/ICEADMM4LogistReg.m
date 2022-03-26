@@ -5,8 +5,8 @@ function out = ICEADMM4LogistReg(di,n,A,b,k0,pars)
 %            s.t.             x_i=x, i=1,2,...,m
 %
 % where 
-%      f_i(x;(A_i,b_i)) = (mu/2)*||x||^2 
-%                       + sum_{j=1}^{d_i} (log(1+exp(<x,(a^i)_j>))-(b^i)_j*<x,(a^i)_j> )
+%      f_i(x;(A_i,b_i)) = (mu/2d_i)*||x||^2 
+%                       + (1/d_i)*sum_{j=1}^{d_i} (log(1+exp(<x,(a^i)_j>))-(b^i)_j*<x,(a^i)_j> )
 %      (A_i,b_i) is the data for node/client i
 %      A_i = [(a^i)_1, (a^i)_2, ..., (a^i)_{d_i}]^T \in\R^{d_i-by-n} 
 %      b_i = [(b^i)_1, (b^i)_2, ..., (b^i)_{d_i}]^T \in\R^{d_i-by-1} 
@@ -118,7 +118,7 @@ for iter = 0 : maxit
     if mod(iter, k0)==0    
     fprintf(' Communication at iter = %4d %9.4f %9.4f  %6.3fsec\n',iter, fy, fX, toc(t0)); 
     end 
-    if err < tol && mod(iter,1)==0; break;  end      
+    if err < tol; break;  end      
     
     for j      = 1 : m
         rhs    = sigw(j)*(y- X(:,j))-rw(j)*(gX(:,j)+PI(:,j));
